@@ -1,0 +1,54 @@
+import datetime
+
+
+CURRENTDAY = datetime.datetime.now()
+
+def get_week_num() -> int :
+    '''
+    return week number
+    '''
+    cur = datetime.datetime.now()
+    first = cur.replace(month=1,day=1)
+    return (cur-first).days // 7 + 1
+
+def parse_time(date, pattern="%Y-%m-%d")->datetime:
+    '''
+    @input: string date and its pattern
+    @output: datetime obj
+    '''
+    return datetime.datetime.strptime(date, pattern)
+
+def str_time(datetimeobj, pattern="%Y-%m-%d")->str:
+    '''
+	@input: datetime obj and its pattern
+	@output: string for datetime
+	'''
+    return datetimeobj.strftime(pattern)
+
+def date_durations(datetimeobj1, datetimeobj2)->int:
+    '''
+	@input: two datetime obj and second one is latter than the first one 
+	@output: the duration days between two date
+	'''
+    return (datetimeobj2 - datetimeobj1).days
+
+def add_time(datetimeobj, days=0, hours=0, minutes=0, seconds=0)->datetime:
+    '''
+	@input: add time to one datetime object
+	@output: result datetime object
+	'''
+    return datetimeobj+datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
+
+def get_week_start_end(week_num=get_week_num()) -> (datetime, datetime):
+    start = add_time(CURRENTDAY,days=-CURRENTDAY.weekday())
+    end = add_time(start, days=6)
+    return start, end
+
+def get_datetime_from_timestamp(timestamp:int) -> datetime:
+    return datetime.datetime.fromtimestamp(timestamp)
+
+def get_next_day() -> datetime:
+    return add_time(CURRENTDAY, days=1)
+
+def get_yesterday() -> datetime:
+    return add_time(CURRENTDAY, days=-1)
