@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import json
 import shlex
 
@@ -8,7 +9,7 @@ def read_json_file(file: str):
 
 def dump_json_file(obj, file: str):
     with open(file, "w") as f:
-        json.dump(obj, f)
+        json.dump(obj, f, ensure_ascii=False)
 
 def parse_curl(curl):
     s = shlex.split(curl)
@@ -20,3 +21,4 @@ def parse_curl(curl):
             headers[l[0]]=l[1]
             i=i+1
     return url, headers
+

@@ -1,17 +1,16 @@
 import datetime
-
+from typing import Tuple
 
 CURRENTDAY = datetime.datetime.now()
 
-def get_week_num() -> int :
+def get_week_num(cur=CURRENTDAY) -> int :
     '''
     return week number
     '''
-    cur = datetime.datetime.now()
     first = cur.replace(month=1,day=1)
     return (cur-first).days // 7 + 1
 
-def parse_time(date, pattern="%Y-%m-%d")->datetime:
+def parse_time(date, pattern="%Y-%m-%d")->datetime.datetime:
     '''
     @input: string date and its pattern
     @output: datetime obj
@@ -32,23 +31,23 @@ def date_durations(datetimeobj1, datetimeobj2)->int:
 	'''
     return (datetimeobj2 - datetimeobj1).days
 
-def add_time(datetimeobj, days=0, hours=0, minutes=0, seconds=0)->datetime:
+def add_time(datetimeobj, days=0, hours=0, minutes=0, seconds=0)->datetime.datetime:
     '''
 	@input: add time to one datetime object
 	@output: result datetime object
 	'''
     return datetimeobj+datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
 
-def get_week_start_end(week_num=get_week_num()) -> (datetime, datetime):
+def get_week_start_end(week_num=get_week_num()) -> Tuple[datetime.datetime, datetime.datetime]:
     start = add_time(CURRENTDAY,days=-CURRENTDAY.weekday())
     end = add_time(start, days=6)
     return start, end
 
-def get_datetime_from_timestamp(timestamp:int) -> datetime:
+def get_datetime_from_timestamp(timestamp:int) -> datetime.datetime:
     return datetime.datetime.fromtimestamp(timestamp)
 
-def get_next_day() -> datetime:
+def get_next_day() -> datetime.datetime:
     return add_time(CURRENTDAY, days=1)
 
-def get_yesterday() -> datetime:
+def get_yesterday() -> datetime.datetime:
     return add_time(CURRENTDAY, days=-1)
