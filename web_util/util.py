@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
 import shlex
+import os
 
 def read_json_file(file: str):
     with open(file) as f:
@@ -8,8 +9,14 @@ def read_json_file(file: str):
     return obj
 
 def dump_json_file(obj, file: str):
+    oobj = {}
+    if os.path.exists(file):
+        with open(file) as f:
+            oobj = json.load(f)
+    for i in obj:
+        oobj[i] = obj[i]
     with open(file, "w") as f:
-        json.dump(obj, f, ensure_ascii=False)
+        json.dump(oobj, f, ensure_ascii=False)
 
 def parse_curl(curl):
     s = shlex.split(curl)
