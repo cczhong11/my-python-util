@@ -23,5 +23,5 @@ def parse_curl(curl):
     return url, headers
 
 def get_top(data):
-    rs = sorted(o.items(), key=lambda x: x[1])[::-1]
+    rs = sorted(data.items(), key=lambda x: x[1])[::-1]
     return [f"- {i[0]}: {i[1]}" for i in rs[:5]]
