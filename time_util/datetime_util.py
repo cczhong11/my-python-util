@@ -1,6 +1,8 @@
 import datetime
 from typing import Tuple
 
+def get_current_date():
+    return datetime.datetime.now()
 
 def get_week_num(cur=get_current_date()) -> int :
     '''
@@ -9,8 +11,7 @@ def get_week_num(cur=get_current_date()) -> int :
     first = cur.replace(month=1,day=1)
     return (cur-first).days // 7 + 1
 
-def get_current_date():
-    return datetime.datetime.now()
+
 def parse_time(date, pattern="%Y-%m-%d")->datetime.datetime:
     '''
     @input: string date and its pattern
