@@ -56,3 +56,11 @@ def get_next_day(CURRENTDAY = get_current_date()) -> datetime.datetime:
 
 def get_yesterday(CURRENTDAY = get_current_date()) -> datetime.datetime:
     return add_time(CURRENTDAY, days=-1)
+
+def seconds_to_hour(seconds: int) -> str:  
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+      
+    return "%d:%02d:%02d" % (hour, minutes, seconds) 
