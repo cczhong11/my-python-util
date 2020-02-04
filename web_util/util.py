@@ -3,7 +3,7 @@ import json
 import shlex
 import os
 import uuid
-
+import urllib
 def read_json_file(file: str):
     with open(file) as f:
         obj = json.load(f)
@@ -35,6 +35,8 @@ def get_top(data, top=5):
     return [f"- {i[0]}: {i[1]}" for i in rs[:top]]
 
 def upload_img(url, data_type=None, folder="cache"):
+    if url is None:
+        return
     name = str(uuid.uuid4().hex)
     if "camo.githubusercontent.com" in url:
         prefix = "png"
