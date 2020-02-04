@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 import shlex
 import os
+import uuid
 
 def read_json_file(file: str):
     with open(file) as f:
@@ -32,3 +33,20 @@ def parse_curl(curl):
 def get_top(data, top=5):
     rs = sorted(data.items(), key=lambda x: x[1])[::-1]
     return [f"- {i[0]}: {i[1]}" for i in rs[:top]]
+
+def upload_img(url, data_type=None, folder="cache"):
+    name = str(uuid.uuid4().hex)
+    if "camo.githubusercontent.com" in url:
+        prefix = "png"
+    elif data_type is None:
+        prefix = url.split(".")[-1]
+    else:
+        prefix = data_type
+    filename = f"{name}.{prefix}"
+    try:
+        f,h = urllib.request.urlretrieve(url,filename)
+    except Exception as e:
+        print(e)
+    os.system(f"aws s3 cp {filename} s3://tczimg/{folder}/ --acl public-read")
+    os.system(f"rm {filename}")
+    return f"https://tczimg.s3.amazonaws.com/{folder}/{filename}"
