@@ -45,9 +45,9 @@ def upload_img(url, data_type=None, folder="cache", name=str(uuid.uuid4().hex)):
         prefix = data_type
     filename = f"{name}.{prefix}"
     try:
-        f,h = urllib.urlretrieve(url,filename)
+        f,h = urllib.urlretrieve(url,"/tmp/"+filename)
     except Exception as e:
         print(e)
-    os.system(f"aws s3 cp {filename} s3://tczimg/{folder}/ --acl public-read")
-    os.system(f"rm {filename}")
+    os.system(f"aws s3 cp /tmp/{filename} s3://tczimg/{folder}/ --acl public-read")
+    os.system(f"rm /tmp/{filename}")
     return f"https://tczimg.s3.amazonaws.com/{folder}/{filename}"
