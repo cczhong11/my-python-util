@@ -3,7 +3,7 @@ import json
 import shlex
 import os
 import uuid
-import urllib
+import urllib.request as urllib
 def read_json_file(file: str):
     with open(file) as f:
         obj = json.load(f)
@@ -45,7 +45,7 @@ def upload_img(url, data_type=None, folder="cache", name=str(uuid.uuid4().hex)):
         prefix = data_type
     filename = f"{name}.{prefix}"
     try:
-        f,h = urllib.request.urlretrieve(url,filename)
+        f,h = urllib.urlretrieve(url,filename)
     except Exception as e:
         print(e)
     os.system(f"aws s3 cp {filename} s3://tczimg/{folder}/ --acl public-read")
