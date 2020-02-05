@@ -34,10 +34,9 @@ def get_top(data, top=5):
     rs = sorted(data.items(), key=lambda x: x[1])[::-1]
     return [f"- {i[0]}: {i[1]}" for i in rs[:top]]
 
-def upload_img(url, data_type=None, folder="cache"):
+def upload_img(url, data_type=None, folder="cache", name=str(uuid.uuid4().hex)):
     if url is None:
         return
-    name = str(uuid.uuid4().hex)
     if "camo.githubusercontent.com" in url:
         prefix = "png"
     elif data_type is None:
