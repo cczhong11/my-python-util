@@ -1,4 +1,5 @@
 import datetime
+from pytz import timezone
 from typing import Tuple
 
 
@@ -16,8 +17,9 @@ def str_time(datetimeobj, pattern="%Y-%m-%d")->str:
 	'''
     return datetimeobj.strftime(pattern)
 
-def get_current_date():
-    return datetime.datetime.now()
+def get_current_date(tz="America/Los_Angeles"):
+    zone = timezone(tz)
+    return zone.localize(datetime.datetime.now())
 
 def get_week_num(cur=get_current_date()) -> int :
     '''
