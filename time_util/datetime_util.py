@@ -19,7 +19,7 @@ def str_time(datetimeobj, pattern="%Y-%m-%d")->str:
 
 def get_current_date(tz="America/Los_Angeles"):
     zone = timezone(tz)
-    return zone.localize(datetime.datetime.now())
+    return datetime.datetime.now(zone)
 
 def get_week_num(cur=get_current_date()) -> int :
     '''
