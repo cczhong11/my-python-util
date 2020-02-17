@@ -32,6 +32,7 @@ def parse_curl(curl):
 
 def get_top(data, top=5):
     rs = sorted(data.items(), key=lambda x: x[1])[::-1]
+    top = max(top,len(rs))
     return [f"- {i[0]}: {i[1]}" for i in rs[:top]]
 
 def upload_img(url, data_type=None, folder="cache", name=str(uuid.uuid4().hex)):
