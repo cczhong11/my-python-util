@@ -30,8 +30,17 @@ def parse_curl(curl):
             i=i+1
     return url, headers
 
+# input is a dict and return markdown list with sorted result
 def get_top(data, top=5):
-    rs = sorted(data.items(), key=lambda x: x[1])[::-1]
+    # if x is time
+    def get_key(x):
+        try:
+            if ":" in x: 
+                k = x.split(":")[0]
+                return int(k)
+        except:
+            return x
+    rs = sorted(data.items(), key=lambda x:get_key(x[1]))[::-1]
     top = min(top,len(rs))
     return [f"- {i[0]}: {i[1]}" for i in rs[:top]]
 
