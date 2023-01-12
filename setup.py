@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ztc-python-util", # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Tianchen Zhong",
     author_email="me@tczhong.com",
     description="A util for myself",

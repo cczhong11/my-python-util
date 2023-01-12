@@ -3,12 +3,13 @@ from pytz import timezone
 from typing import Tuple
 
 
-def parse_time(date, pattern="%Y-%m-%d")->datetime.datetime:
+def parse_time(date, pattern="%Y-%m-%d", tz="America/Los_Angeles")->datetime.datetime:
     '''
     @input: string date and its pattern
     @output: datetime obj
     '''
-    return datetime.datetime.strptime(date, pattern)
+    tzi = timezone(tz)
+    return datetime.datetime.strptime(date, pattern).replace(tzinfo=tzi)
 
 def str_time(datetimeobj, pattern="%Y-%m-%d")->str:
     '''
